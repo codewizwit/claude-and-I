@@ -76,6 +76,7 @@ See [settings.json tips](docs/settings-json-tips.md) for a full breakdown of eac
 |-------|---------|-------------|
 | **Skill Scout** | `/skill-scout` | Analyzes your codebase and session workflow for repetitive patterns. Also triggered automatically on context compact. |
 | **Repo Skills** | `/repo-skills` | Analyzes git history, PR patterns, review comments, and branch conventions to find automatable repo operations. |
+| **Init CLAUDE.md** | `/init-claude-md` | Analyzes a project's tech stack, conventions, and patterns, then generates a tailored project-level CLAUDE.md — smarter than `claude init`. |
 
 To use skills in other projects:
 
@@ -93,6 +94,7 @@ cp -r .claude/skills/* ~/.claude/skills/
 - **Be specific.** "Write clean code" means nothing. "No function longer than 30 lines" means something.
 - **Write it like preferences, not documentation.** "I want..." and "When I ask..." work better than formal specs.
 - **Layer it.** Put universal preferences in `~/.claude/CLAUDE.md` (global) and project-specific rules in `./CLAUDE.md` (per-repo). Both are loaded automatically.
+- **Aim for 30-100 lines.** That's the sweet spot. Beyond 200 lines, content gets truncated. If yours is growing past 100, extract multi-step processes or workflow context into [skills](docs/what-is-a-skill.md).
 
 ## Learn More
 
@@ -104,3 +106,7 @@ cp -r .claude/skills/* ~/.claude/skills/
 ## License
 
 [MIT](LICENSE)
+
+---
+
+*No Human Left Behind* — by [codewizwit](https://github.com/codewizwit)

@@ -227,5 +227,5 @@ chmod +x ~/.claude/hooks/*.sh
 
 ## Further Reading
 
-- [Claude Code documentation on settings](https://docs.anthropic.com/en/docs/claude-code/settings)
+- [Official Claude Code settings documentation](https://code.claude.com/docs/en/settings)
 - [What is a CLAUDE.md?](what-is-a-claude-md.md) — the other half of configuring Claude Code

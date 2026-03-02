@@ -4,12 +4,16 @@ A skill is a reusable prompt — detailed instructions in a markdown file that t
 
 ## How It Works
 
-A skill lives in a directory with a `SKILL.md` file:
+A skill lives in a directory with a `SKILL.md` file. The directory can also include supporting files — templates, examples, scripts — that the skill references.
 
 ```
-~/.claude/skills/
-└── my-skill/
-    └── SKILL.md
+my-skill/
+├── SKILL.md           # Main instructions (required)
+├── template.md        # Template for Claude to fill in (optional)
+├── examples/
+│   └── sample.md      # Example output (optional)
+└── scripts/
+    └── helper.sh      # Script Claude can execute (optional)
 ```
 
 The `SKILL.md` has two parts: **YAML frontmatter** (configuration) and a **markdown body** (instructions).
@@ -17,42 +21,68 @@ The `SKILL.md` has two parts: **YAML frontmatter** (configuration) and a **markd
 ```yaml
 ---
 name: my-skill
-description: What this skill does in one sentence.
+description: What this skill does and when to use it.
 ---
-```
-
-```markdown
-# My Skill
 
 Step-by-step instructions that Claude follows when this skill is invoked.
-Use specific tool names and concrete actions — not vague guidance.
+Reference supporting files so Claude knows when to load them.
 ```
 
-When invoked, Claude reads the full `SKILL.md` and follows the instructions as if you'd typed them into the conversation.
+When invoked, Claude reads the full `SKILL.md` and follows the instructions. Skill descriptions are loaded into context so Claude knows what's available, but the full content only loads when the skill is actually invoked.
+
+## Where Skills Live
+
+Where you store a skill determines who can use it:
+
+| Location | Path | Applies to |
+|----------|------|------------|
+| **Enterprise** | Managed settings | All users in your organization |
+| **Personal** | `~/.claude/skills/<name>/SKILL.md` | All your projects |
+| **Project** | `.claude/skills/<name>/SKILL.md` | This project only |
+| **Plugin** | `<plugin>/skills/<name>/SKILL.md` | Where plugin is enabled |
+
+Higher-priority locations win when names conflict: enterprise > personal > project. In monorepos, skills in nested `.claude/skills/` directories are discovered automatically when you work in those subdirectories.
 
 ## Frontmatter Fields
 
+All fields are technically optional, but `name` and `description` should always be included in practice. Without a `name`, the directory name is used. Without a `description`, Claude falls back to the first paragraph of the markdown body — which is rarely as clear.
+
 | Field | Required | Description |
 |-------|----------|-------------|
-| `name` | Yes | Identifier used for invocation (e.g., `my-skill` for `/my-skill`) |
-| `description` | Yes | One-line summary shown in skill listings |
+| `name` | Recommended | Display name and `/slash-command`. Defaults to the directory name if omitted. Lowercase letters, numbers, hyphens only (max 64 chars). |
+| `description` | Recommended | What the skill does and when to use it. Claude uses this to decide when to load it automatically. Falls back to first paragraph of content if omitted. |
 | `disable-model-invocation` | No | If `true`, only the user can trigger it via `/name`. Claude won't auto-invoke it. Default: `false` |
-| `allowed-tools` | No | Comma-separated list of tools the skill can use (e.g., `Read, Write, Glob, Grep, Bash`) |
-| `argument-hint` | No | Hint shown to the user for expected arguments (e.g., `[file-path]`, `[component-name]`) |
-| `context` | No | Set to `fork` to run in an isolated context that doesn't affect the main conversation |
-| `agent` | No | Agent configuration for skills that spawn subagents |
+| `user-invocable` | No | If `false`, hides the skill from the `/` menu. Use for background knowledge Claude should apply automatically but users shouldn't invoke directly. Default: `true` |
+| `allowed-tools` | No | Tools Claude can use without asking permission when this skill is active (e.g., `Read, Write, Glob, Grep, Bash`) |
+| `argument-hint` | No | Hint shown during autocomplete for expected arguments (e.g., `[file-path]`, `[issue-number]`) |
+| `model` | No | Model to use when this skill is active |
+| `context` | No | Set to `fork` to run in an isolated subagent context |
+| `agent` | No | Which subagent type to use when `context: fork` is set (e.g., `Explore`, `Plan`, `general-purpose`) |
+| `hooks` | No | Hooks scoped to this skill's lifecycle |
 
 ## Invocation Types
 
-Skills can be triggered in three ways:
+Two frontmatter fields control who can invoke a skill:
 
-- **User-only** (`disable-model-invocation: true`): Activated only when you type `/skill-name`. Best for expensive or disruptive operations you want explicit control over.
-- **Claude-only**: Claude detects when the skill is relevant and applies it automatically. Best for coding standards and patterns that should always be enforced.
-- **Both** (default): Either you or Claude can trigger it. Best for general-purpose utilities.
+| Frontmatter | You can invoke | Claude can invoke | Best for |
+|-------------|---------------|-------------------|----------|
+| (default) | Yes | Yes | General-purpose utilities |
+| `disable-model-invocation: true` | Yes | No | Expensive or disruptive operations — deploy, commit, send messages |
+| `user-invocable: false` | No | Yes | Background knowledge — conventions, domain context, legacy system docs |
+
+## Arguments and Substitutions
+
+Skills support arguments via the `$ARGUMENTS` placeholder. When you run `/fix-issue 123`, `$ARGUMENTS` is replaced with `123`.
+
+| Variable | Description |
+|----------|-------------|
+| `$ARGUMENTS` | All arguments passed when invoking the skill |
+| `$ARGUMENTS[N]` or `$N` | A specific argument by position (0-based) |
+| `${CLAUDE_SESSION_ID}` | The current session ID |
+
+For dynamic context, use the `` !`command` `` syntax to run shell commands before the skill content is sent to Claude — the output replaces the placeholder.
 
 ## Installation
-
-Copy the skill directory into your Claude Code skills folder:
 
 ```bash
 # Project-specific (available when working in this repo)
@@ -63,15 +93,13 @@ cp -r /path/to/my-skill .claude/skills/my-skill
 cp -r /path/to/my-skill ~/.claude/skills/my-skill
 ```
 
-Skills in `.claude/skills/` within a repo are available when you work in that project. Skills in `~/.claude/skills/` are available globally across all projects.
-
 ## When to Create a Skill
 
-Good candidates for skills:
+Good candidates:
 - **Repetitive multi-step workflows** you run more than twice a week
 - **Scaffolding tasks** that create the same file structure each time
 - **Analysis patterns** you apply across different repos
-- **Code review checklists** with specific criteria to evaluate
+- **Background knowledge** — conventions, domain context, API patterns Claude should always know
 
 Poor candidates:
 - One-off tasks you'll never repeat
@@ -80,5 +108,5 @@ Poor candidates:
 
 ## Further Reading
 
-- [Claude Code documentation on skills](https://docs.anthropic.com/en/docs/claude-code/skills)
+- [Official Claude Code skills documentation](https://code.claude.com/docs/en/skills)
 - [What is a CLAUDE.md?](what-is-a-claude-md.md) — how skills and CLAUDE.md files complement each other

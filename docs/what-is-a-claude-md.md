@@ -53,9 +53,9 @@ When multiple levels exist, they're combined — user-level applies first, then 
 
 **Iterate over time.** Every time Claude does something you don't like, add a rule. Every time you repeat yourself across sessions, capture it. A good CLAUDE.md is a living document that gets sharper with use.
 
-**Keep it under 80 lines.** Longer files dilute the signal. If you need more, split project-specific rules into a project-level CLAUDE.md and keep your personal one focused.
+**Aim for 30-100 lines.** The sweet spot for signal-to-noise. Beyond 200 lines, content gets truncated and stops being read. A 50-line file uses roughly 2,000 tokens — under 1% of the context window. If yours is creeping past 100, split project-specific rules into a project-level CLAUDE.md or extract multi-step processes into skills.
 
 ## Further Reading
 
-- [Claude Code documentation on CLAUDE.md](https://docs.anthropic.com/en/docs/claude-code/claude-md)
+- [Official Claude Code CLAUDE.md documentation](https://code.claude.com/docs/en/memory)
 - [What is a skill?](what-is-a-skill.md) — reusable prompts that complement your CLAUDE.md
