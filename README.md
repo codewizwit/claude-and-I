@@ -1,6 +1,8 @@
-# Claude Code Playbook
+# claude & i
 
 A complete Claude Code environment. 21 agents, 27 skills, 12 role-based standards. Fork it, run the setup wizard, and make it yours.
+
+[![Live Site](https://img.shields.io/badge/live_site-claude_%26_i-7c3aed?style=for-the-badge)](https://claude-code-playbook-sigma.vercel.app) [![GitHub](https://img.shields.io/badge/github-codewizwit-18181b?style=for-the-badge&logo=github)](https://github.com/codewizwit/claude-code-playbook)
 
 ## Quick Start
 
