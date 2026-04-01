@@ -1,6 +1,6 @@
 ---
 name: Storyteller
-type: fun
+type: creative
 model: sonnet
 tools: "Read, Grep, Glob, Write"
 tagline: Write a talk about AI augmentation.

@@ -20,8 +20,18 @@ const typeLabels: Record<string, string> = {
   work: "Work",
   meta: "Meta",
   utility: "Utility",
-  project: "Project",
+  planning: "Planning",
+  creative: "Creative",
   fun: "Fun",
+};
+
+const typeColors: Record<string, string> = {
+  work: "#60a5fa",
+  meta: "#a78bfa",
+  utility: "#34d399",
+  planning: "#fbbf24",
+  creative: "#f472b6",
+  fun: "#fb923c",
 };
 
 const modelColor = modelColors[model] || "var(--text-muted)";
@@ -30,7 +40,7 @@ const modelColor = modelColors[model] || "var(--text-muted)";
 <a href={`/agents/${slug}`} class="agent-card">
   <div class="card-header">
     <span class="agent-name">{name}</span>
-    <span class="agent-type">{typeLabels[type] || type}</span>
+    <span class="agent-type" style={`color: ${typeColors[type] || "var(--text-muted)"}; border-color: ${typeColors[type] || "var(--border)"}`}>{typeLabels[type] || type}</span>
   </div>
   <p class="tagline">"{tagline}"</p>
   <div class="card-meta">
