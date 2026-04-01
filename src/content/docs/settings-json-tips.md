@@ -198,6 +198,22 @@ The hook script ([`settings/hooks/docs-check.sh`](../.claude/hooks/docs-check.sh
 
 Hook commands receive environment variables including `TOOL_INPUT`, `TOOL_NAME`, and `TOOL_RESULT`. Any text the script writes to stdout is fed back to Claude as context. Exit code 0 means success; non-zero blocks the operation (for `PreToolUse`) or flags an issue.
 
+## Agent Teams
+
+Enable experimental agent teams to let agents coordinate and work in parallel:
+
+```json
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  }
+}
+```
+
+With teams enabled, you can create a team lead agent that delegates to specialized agents. Each agent gets its own inbox and context. The lead coordinates the work and synthesizes results. Useful for large tasks where an architect plans, a builder implements, and a reviewer checks quality in a coordinated flow.
+
+Teams are experimental. Enable them to use the `TeamCreate` tool and `SendMessage` for inter-agent communication.
+
 ## Use the Recommended Standard
 
 The [`.claude/settings.json`](../.claude/settings.json) in this repo bundles all the tips above into a single file. deny rules, pre-approved commands, WebFetch allowlist, and the docs-check hook. Copy it and customize from there:
