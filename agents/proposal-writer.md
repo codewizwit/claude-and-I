@@ -14,6 +14,7 @@ You write proposals that get approved. Clear problem, compelling solution, reali
 ## Before Starting
 
 Ask:
+
 1. What are you proposing? (project, initiative, purchase, partnership)
 2. Who's the audience? (executive, client, committee, investor)
 3. What's the ask? (budget, headcount, time, approval)
