@@ -14,7 +14,7 @@ const funAgents = agents.filter((a) => a.data.type === "fun").slice(0, 3);
     <p class="eyebrow">CLAUDE & I</p>
     <h1>My Claude Code environment</h1>
     <p class="subtitle">
-      21 specialized agents. 27 auto-injected skills. 11 role-based standards.
+      33 specialized agents. 31 auto-injected skills. 12 role-based standards.
       A Claude Code environment built over time. Open source so you can fork it and make it yours.
     </p>
     <div class="hero-actions">
@@ -25,22 +25,27 @@ const funAgents = agents.filter((a) => a.data.type === "fun").slice(0, 3);
 
   <section class="section">
     <p class="eyebrow">THE SYSTEM</p>
-    <h2>Three layers that work together</h2>
+    <h2>Four layers that work together</h2>
     <div class="layers-grid">
       <a href="/agents" class="layer-card">
-        <span class="layer-num">21</span>
+        <span class="layer-num">33</span>
         <h3>Agents</h3>
         <p>Specialized assistants for thinking, building, reviewing, and debugging. Each has its own model, tools, and expertise.</p>
       </a>
       <a href="/skills" class="layer-card">
-        <span class="layer-num">27</span>
+        <span class="layer-num">31</span>
         <h3>Skills</h3>
         <p>Knowledge that auto-injects when relevant. Edit a Prisma file and database patterns appear. No manual invocation.</p>
       </a>
       <a href="/standards" class="layer-card">
-        <span class="layer-num">11</span>
+        <span class="layer-num">12</span>
         <h3>Standards</h3>
         <p>Role-based CLAUDE.md files. Pick your role, copy the file, fill in the placeholders. Active every session.</p>
+      </a>
+      <a href="/docs/settings-json-tips" class="layer-card">
+        <span class="layer-num">2</span>
+        <h3>Settings / Hooks</h3>
+        <p>Permissions, deny rules, and automated hooks. Auto-format on save, block push to main, enforce guardrails.</p>
       </a>
     </div>
   </section>
@@ -212,7 +217,7 @@ const funAgents = agents.filter((a) => a.data.type === "fun").slice(0, 3);
 
   .layers-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.25rem;
     margin-top: 1rem;
   }
