@@ -8,38 +8,49 @@ const { title, description = "Ready-to-use agents, skills, and configs for Claud
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title} — claude &amp; i</title>
     <style is:global>
-      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
       :root {
-        --bg: #09090b;
-        --bg-card: #18181b;
-        --bg-hover: #27272a;
-        --border: #27272a;
-        --text: #fafafa;
-        --text-muted: #a1a1aa;
-        --accent: #a78bfa;
+        --bg: #ffffff;
+        --bg-card: #ffffff;
+        --bg-subtle: #f8fafc;
+        --bg-hover: #f1f5f9;
+        --border: #e5e7eb;
+        --border-strong: #cbd5e1;
+        --text: #0f172a;
+        --text-muted: #475569;
+        --text-subtle: #6b7280;
+        --accent: #5b21b6;
         --accent-dim: #7c3aed;
-        --green: #34d399;
-        --yellow: #fbbf24;
-        --red: #f87171;
-        --blue: #60a5fa;
+        --accent-soft: #faf5ff;
+        --accent-border: #e9d5ff;
+        --green: #047857;
+        --green-bg: #ecfdf5;
+        --yellow: #b45309;
+        --yellow-bg: #fffbeb;
+        --red: #b91c1c;
+        --red-bg: #fef2f2;
+        --blue: #1e40af;
+        --blue-bg: #eff6ff;
       }
 
       * { margin: 0; padding: 0; box-sizing: border-box; }
 
+      html, body { background: var(--bg); }
+
       body {
-        font-family: 'Inter', system-ui, sans-serif;
-        background: var(--bg);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
         color: var(--text);
-        line-height: 1.6;
+        line-height: 1.65;
         min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
       }
 
       code, pre {
@@ -52,30 +63,42 @@ const { title, description = "Ready-to-use agents, skills, and configs for Claud
       }
       a:hover { text-decoration: underline; }
 
+      /* Global code block behavior: wrap long lines, no horizontal scroll */
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+
       .container {
-        max-width: 1100px;
+        max-width: 1400px;
         margin: 0 auto;
-        padding: 0 1.5rem;
+        padding: 0 2.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .container { padding: 0 1.25rem; }
       }
     </style>
   </head>
   <body>
-    <nav style="border-bottom: 1px solid var(--border); padding: 1rem 0;">
+    <nav style="border-bottom: 1px solid var(--border); padding: 1rem 0; background: var(--bg);">
       <div class="container" style="display: flex; align-items: center; gap: 2rem;">
-        <a href="/" style="font-weight: 700; font-size: 1.1rem; color: var(--text);">claude & i</a>
-        <div style="display: flex; gap: 1.5rem; font-size: 0.9rem;">
-          <a href="/agents">Agents</a>
-          <a href="/skills">Skills</a>
-          <a href="/standards">Standards</a>
-          <a href="/docs">Docs</a>
-          <a href="https://github.com" id="gh-link" style="color: var(--text-muted);">GitHub</a>
+        <a href="/" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--text); letter-spacing: -0.01em;">claude & i</a>
+        <div style="display: flex; gap: 1.75rem; font-size: 0.92rem; font-weight: 500;">
+          <a href="/agents" style="color: var(--text);">Agents</a>
+          <a href="/skills" style="color: var(--text);">Skills</a>
+          <a href="/labs" style="color: var(--text);">Labs</a>
+          <a href="/standards" style="color: var(--text);">Standards</a>
+          <a href="/docs" style="color: var(--text);">Docs</a>
+          <a href="https://github.com" id="gh-link" style="color: var(--text-subtle);">GitHub</a>
         </div>
       </div>
     </nav>
-    <main class="container" style="padding: 2rem 0 4rem;">
+    <main class="container" style="padding: 2rem 2.5rem 4rem;">
       <slot />
     </main>
-    <footer style="border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+    <footer style="border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; color: var(--text-subtle); font-size: 0.85rem; background: var(--bg);">
       <div class="container">
         No Human Left Behind. Built by <a href="https://codewizwit.com">codewizwit</a>
       </div>

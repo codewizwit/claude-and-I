@@ -33,4 +33,18 @@ const starters = defineCollection({
   }),
 });
 
-export const collections = { agents, docs, starters };
+const labs = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/labs" }),
+  schema: z.object({
+    title: z.string(),
+    difficulty: z.enum(["easy", "medium", "hard"]),
+    time: z.string(),
+    tags: z.array(z.string()),
+    prerequisites: z.array(z.string()),
+    learn: z.array(z.string()),
+    docs: z.array(z.string()).optional(),
+    order: z.number().optional(),
+  }),
+});
+
+export const collections = { agents, docs, starters, labs };

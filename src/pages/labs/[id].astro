@@ -1,0 +1,477 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const labs = await getCollection("labs");
+  return labs.map((lab) => ({
+    params: { id: lab.id },
+    props: { lab },
+  }));
+}
+
+const { lab } = Astro.props;
+const { Content } = await render(lab);
+
+const difficultyStyles: Record<string, string> = {
+  easy: "background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0;",
+  medium: "background: #fffbeb; color: #b45309; border: 1px solid #fde68a;",
+  hard: "background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca;",
+};
+
+const difficultyLabel: Record<string, string> = {
+  easy: "easy",
+  medium: "medium",
+  hard: "hard",
+};
+---
+
+<Base title={lab.data.title} description={`Claude Lab: ${lab.data.title}. ${lab.data.time}, ${lab.data.difficulty} difficulty.`}>
+  <div class="page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="chev">›</span>
+      <a href="/labs">Labs</a>
+      <span class="chev">›</span>
+      <span class="crumb-current">{lab.data.title}</span>
+    </nav>
+
+    <header class="lab-header">
+      <h1>{lab.data.title}</h1>
+      <div class="pills">
+        <span class="pill" style={difficultyStyles[lab.data.difficulty]}>{difficultyLabel[lab.data.difficulty]}</span>
+        {lab.data.tags.slice(0, 2).map((tag) => (
+          <span class="pill pill-tag">{tag}</span>
+        ))}
+        <span class="time-pill">{lab.data.time}</span>
+      </div>
+    </header>
+
+    <div class="info-card">
+      <div class="info-section">
+        <p class="info-label">Prerequisites</p>
+        <ul>
+          {lab.data.prerequisites.map((p) => (
+            <li>{p}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="info-divider"></div>
+
+      <div class="info-section">
+        <p class="info-label">What you'll learn</p>
+        <ul>
+          {lab.data.learn.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    {lab.data.docs && lab.data.docs.length > 0 && (
+      <aside class="reference-strip">
+        <span class="ref-label">REFERENCE</span>
+        <div class="ref-links">
+          {lab.data.docs.map((d) => (
+            <a href={d} target={d.startsWith('http') ? '_blank' : undefined} rel={d.startsWith('http') ? 'noopener' : undefined} class="ref-link">
+              {d.startsWith('http') ? 'Official Claude Code docs' : d.replace('/docs/', 'Doc: ').replace(/-/g, ' ')}
+              <span class="ref-arrow">{d.startsWith('http') ? '↗' : '→'}</span>
+            </a>
+          ))}
+        </div>
+      </aside>
+    )}
+
+    <article class="lab-content">
+      <Content />
+    </article>
+
+    <aside class="footer-cta">
+      <p class="cta-eyebrow">FINISHED?</p>
+      <h3>You just built an artifact you can keep.</h3>
+      <p>Save it, share it, iterate on it. The next lab builds on what you just made.</p>
+      <a href="/labs" class="btn">Browse more labs &rarr;</a>
+    </aside>
+  </div>
+
+  <script>
+    document.querySelectorAll('.lab-content pre').forEach((pre) => {
+      const btn = document.createElement('button');
+      btn.className = 'code-copy';
+      btn.textContent = 'Copy';
+      btn.setAttribute('aria-label', 'Copy code');
+      pre.appendChild(btn);
+      btn.addEventListener('click', () => {
+        const code = pre.querySelector('code')?.textContent || '';
+        navigator.clipboard.writeText(code);
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+      });
+    });
+  </script>
+</Base>
+
+<style>
+  .page {
+    width: 100%;
+    color: #0f172a;
+  }
+
+  .breadcrumb {
+    padding: 2rem 0 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+  }
+  .breadcrumb a {
+    color: #6b7280;
+    text-decoration: none;
+  }
+  .breadcrumb a:hover { color: #5b21b6; }
+  .chev {
+    color: #cbd5e1;
+    font-size: 1rem;
+  }
+  .crumb-current {
+    color: #0f172a;
+    font-weight: 500;
+  }
+
+  .lab-header {
+    padding: 0 0 2rem;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .lab-header h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2.75rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+    color: #0f172a;
+    margin-bottom: 1.25rem;
+  }
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .pill {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+    line-height: 1;
+    text-transform: lowercase;
+  }
+  .pill-tag {
+    background: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+  }
+  .time-pill {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    color: #6b7280;
+    padding: 0.35rem 0.5rem;
+  }
+
+  .info-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.875rem;
+    padding: 2rem 2.25rem;
+    margin: 2rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  .info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .info-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #0f172a;
+    text-transform: uppercase;
+  }
+  .info-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .info-section li {
+    color: #334155;
+    font-size: 1rem;
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.55;
+  }
+  .info-section li::before {
+    content: '';
+    position: absolute;
+    left: 0.25rem;
+    top: 0.55rem;
+    width: 5px;
+    height: 5px;
+    background: #334155;
+    border-radius: 50%;
+  }
+  .info-divider {
+    display: none;
+  }
+
+  .reference-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    background: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-radius: 0.625rem;
+    padding: 0.85rem 1.25rem;
+    margin: 0 0 2.5rem;
+  }
+  .ref-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #5b21b6;
+    flex-shrink: 0;
+  }
+  .ref-links {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .ref-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #5b21b6;
+    font-size: 0.88rem;
+    font-weight: 500;
+    background: #ffffff;
+    border: 1px solid #e9d5ff;
+    border-radius: 0.45rem;
+    padding: 0.3rem 0.75rem;
+    text-decoration: none;
+    transition: border-color 0.15s;
+  }
+  .ref-link:hover { border-color: #5b21b6; text-decoration: none; }
+  .ref-arrow { color: #a78bfa; }
+
+  .lab-content {
+    line-height: 1.75;
+    font-size: 1.02rem;
+    color: #334155;
+    padding: 1rem 0 3rem;
+  }
+  .lab-content :global(h2) {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .lab-content :global(h2:first-child) { margin-top: 0.5rem; }
+  .lab-content :global(h3) {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .lab-content :global(p) {
+    color: #334155;
+    margin-bottom: 1rem;
+  }
+  .lab-content :global(strong) {
+    color: #0f172a;
+    font-weight: 600;
+  }
+  .lab-content :global(a) {
+    color: #5b21b6;
+    text-decoration: underline;
+    text-decoration-color: #e9d5ff;
+    text-underline-offset: 3px;
+  }
+  .lab-content :global(a:hover) { text-decoration-color: #5b21b6; }
+  .lab-content :global(ul), .lab-content :global(ol) {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .lab-content :global(li) {
+    margin-bottom: 0.4rem;
+    color: #334155;
+  }
+  .lab-content :global(li::marker) { color: #a78bfa; }
+
+  .lab-content :global(code) {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    padding: 0.1rem 0.4rem;
+    border-radius: 0.3rem;
+    font-size: 0.88em;
+    color: #0f172a;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .lab-content :global(pre) {
+    position: relative;
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    padding: 2.25rem 1.25rem 1.1rem;
+    padding-right: 4.5rem;
+    border-radius: 0.625rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-size: 0.88rem;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  }
+  .lab-content :global(pre)::before {
+    content: '● ● ●';
+    position: absolute;
+    top: 0.7rem;
+    left: 1.25rem;
+    color: #475569;
+    font-size: 0.62rem;
+    letter-spacing: 0.2rem;
+  }
+  .lab-content :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #e2e8f0;
+    font-size: inherit;
+  }
+  .lab-content :global(.code-copy) {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.6rem;
+    padding: 0.28rem 0.7rem;
+    font-size: 0.72rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    background: #1e293b;
+    color: #cbd5e1;
+    border: 1px solid #334155;
+    border-radius: 0.35rem;
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+  }
+  .lab-content :global(.code-copy:hover) {
+    color: #ffffff;
+    background: #334155;
+  }
+
+  .lab-content :global(blockquote) {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-left: 4px solid #10b981;
+    padding: 1rem 1.35rem;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+    color: #064e3b;
+    font-style: normal;
+  }
+  .lab-content :global(blockquote p) {
+    color: #064e3b;
+    margin: 0;
+  }
+  .lab-content :global(blockquote strong) {
+    color: #047857;
+  }
+
+  .lab-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  .lab-content :global(th), .lab-content :global(td) {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0.85rem 1rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .lab-content :global(th) {
+    background: #f8fafc;
+    font-weight: 600;
+    color: #0f172a;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .lab-content :global(td) { color: #334155; }
+  .lab-content :global(tr:last-child td) { border-bottom: none; }
+
+  .lab-content :global(hr) {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 2.5rem 0;
+  }
+
+  .footer-cta {
+    background: linear-gradient(135deg, #faf5ff 0%, #f5f3ff 100%);
+    border: 1px solid #e9d5ff;
+    border-radius: 1rem;
+    padding: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .cta-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #5b21b6;
+    margin-bottom: 0.5rem;
+  }
+  .footer-cta h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .footer-cta p {
+    color: #475569;
+    margin-bottom: 1.5rem;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 1.6rem;
+    border-radius: 0.5rem;
+    background: #5b21b6;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .btn:hover { background: #4c1d95; text-decoration: none; }
+
+  @media (max-width: 768px) {
+    .lab-header h1 { font-size: 1.85rem; }
+    .info-card { padding: 1.5rem 1.25rem; }
+    .reference-strip { flex-direction: column; align-items: flex-start; }
+  }
+</style>
