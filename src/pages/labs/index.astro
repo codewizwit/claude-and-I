@@ -46,6 +46,41 @@ const difficultyLabel: Record<string, string> = {
       </div>
     </section>
 
+    <section class="path-callout">
+      <div class="path-inner">
+        <div class="path-intro">
+          <p class="eyebrow">LEARNING PATH</p>
+          <h2>Skills → Agents → Teams</h2>
+          <p>If you're new to Claude Code, these three labs in order teach the orchestration pattern. Start with a skill, turn a role into an agent, then run a team.</p>
+        </div>
+        <div class="path-steps">
+          <a href="/labs/build-your-first-skill" class="path-step">
+            <span class="path-num">1</span>
+            <div>
+              <strong>Build Your First Skill</strong>
+              <span>A reusable prompt, in your voice.</span>
+            </div>
+          </a>
+          <span class="path-arrow">→</span>
+          <a href="/labs/build-a-custom-agent" class="path-step">
+            <span class="path-num">2</span>
+            <div>
+              <strong>Build a Custom Agent</strong>
+              <span>Turn a role you play into a specialist.</span>
+            </div>
+          </a>
+          <span class="path-arrow">→</span>
+          <a href="/labs/agent-teams" class="path-step">
+            <span class="path-num">3</span>
+            <div>
+              <strong>Agent Teams</strong>
+              <span>Orchestrate specialists on real projects.</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <section class="catalog">
       <div class="catalog-header">
         <p class="eyebrow">LAB CATALOG</p>
@@ -117,11 +152,102 @@ const difficultyLabel: Record<string, string> = {
   }
 
   .banner {
-    margin: 3rem 0;
+    margin: 3rem 0 2rem;
     background: #faf5ff;
     border: 1px solid #e9d5ff;
     border-radius: 1rem;
     padding: 2.5rem 2.75rem;
+  }
+
+  .path-callout {
+    margin: 0 0 3rem;
+    background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 60%);
+    border: 1px solid #bae6fd;
+    border-radius: 1rem;
+    padding: 2rem 2.5rem;
+  }
+  .path-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .path-intro h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+    margin: 0.25rem 0 0.5rem;
+  }
+  .path-intro p {
+    color: #475569;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    max-width: 680px;
+  }
+  .path-steps {
+    display: flex;
+    align-items: stretch;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .path-step {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex: 1 1 240px;
+    min-width: 220px;
+    background: #ffffff;
+    border: 1px solid #bae6fd;
+    border-radius: 0.75rem;
+    padding: 0.9rem 1.1rem;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .path-step:hover {
+    border-color: #0284c7;
+    box-shadow: 0 3px 12px rgba(2, 132, 199, 0.12);
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+  .path-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #0369a1;
+    background: #e0f2fe;
+    border: 1px solid #bae6fd;
+    width: 1.9rem;
+    height: 1.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.4rem;
+    flex-shrink: 0;
+  }
+  .path-step strong {
+    display: block;
+    color: #0f172a;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 0.15rem;
+  }
+  .path-step span:not(.path-num) {
+    display: block;
+    color: #64748b;
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+  .path-arrow {
+    display: flex;
+    align-items: center;
+    color: #0ea5e9;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+  @media (max-width: 900px) {
+    .path-arrow { display: none; }
   }
   .banner-inner {
     display: grid;

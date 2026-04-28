@@ -1,59 +1,63 @@
 ---
 title: "Claude as a Thought Partner"
 difficulty: easy
-time: "15 minutes"
-tags: ["thought-partner", "foundational", "decisions"]
+time: "20 minutes"
+tags: ["thought-partner", "decisions", "html"]
 prerequisites:
   - "Claude Code is already open"
-  - "A real decision, idea, or situation you are actually wrestling with right now"
-  - "No coding experience needed. You will talk, Claude will reflect back."
+  - "A real decision, idea, or situation you are actually wrestling with"
+  - "A web browser for the visual artifact"
 learn:
   - "How to set Claude up as a thought partner, not a task-doer"
   - "How to get Claude to probe your thinking instead of giving you answers"
-  - "How to notice the assumption you were missing, the counter-case you were avoiding, and the failure mode you were not seeing"
-  - "When to use Claude this way and when to use it differently"
+  - "How to generate an interactive HTML thought map that grows as you probe"
+  - "How to notice the assumption, counter-case, and failure mode you were missing"
 docs:
   - "https://docs.anthropic.com/en/docs/claude-code/interactive-mode"
-order: 3
+order: 5
 ---
 
 ## What You Are Building
 
-Not a file. A new way to use Claude. By the end of this lab you will know how to flip Claude out of "helpful assistant" mode and into "thought partner" mode, where Claude does not offer ideas at all. It only asks the questions that help you think more clearly.
+An interactive HTML thought map of your own thinking about a real decision. Every assumption, counter-case, and failure mode you name becomes a node on the map. The map grows as you talk. At the end, you can see the whole shape of your own thinking on one page and share it with someone who needs to understand how you arrived at a decision.
 
-This is called mirror mode. In this mode Claude reflects your thinking back at you. It probes assumptions. It steel-mans the position you did not want to hear. It finds the edge where your idea might break. Every thought that comes out of the session is yours. Claude did not hand you anything. It just asked the right questions.
+You are not learning to code. Claude plays thought partner, you do all the thinking, and Claude generates the visual map.
+
+By the end you will have:
+
+- A real decision, idea, or situation you thought through with Claude as mirror
+- An HTML thought map showing your full reasoning tree
+- A new instinct for when to use Claude as partner vs task-doer
 
 > **At work, this comes up when you're...**
 >
 > - making a decision you will have to defend and want to know where the holes are
 > - prepping for a hard conversation and wondering what you are not seeing
-> - stress-testing a plan before you commit to it
+> - stress-testing a plan before you commit
 > - writing a recommendation and want to know the strongest counter-case
-> - stuck, and more advice is not what you need, more clarity is
+> - stuck, and more advice is not what you need — more clarity is
 
 ## Why This Matters
 
-Most people use Claude as a task-doer: "write this", "summarize that", "plan this." That is useful. But it has a ceiling. The quality of the output is capped by what you knew to ask for.
+Most people use Claude as a task-doer: "write this," "plan that." Useful but has a ceiling. The quality of output is capped by what you knew to ask for.
 
-Thought partner mode breaks the ceiling. Instead of extracting an answer from Claude, you use Claude to extract the answer from yourself. You leave the conversation with better thinking, not with a document.
+Thought partner mode breaks the ceiling. You use Claude to extract the answer from yourself. You leave with better thinking, not a document.
 
-This is also the mode that builds judgment. Every session, you notice an assumption you were carrying, a question you were avoiding, a consequence you were not imagining. That noticing is a skill. You get better at it every time you do this.
+The thought map is the upgrade. Text conversations with Claude scroll away. A visual tree of your reasoning is something you refer back to when the decision comes up again in a month.
 
 ---
 
 ## Pick the real thing
 
-> **Hint:** _Pick something you actually care about. The exercise only works on real weight. Do not use a made-up example._
+> **Hint:** _Pick something you actually care about. The exercise only works on real weight._
 
-Think of something you are wrestling with right now. Good candidates:
+Good candidates:
 
 - A decision you have been delaying
-- A recommendation you will need to defend to your team or your boss
+- A recommendation you need to defend
 - A strategy you are pretty sure about but have not stress-tested
 - A conversation you are anxious about having
 - An opinion you hold that you have never really examined
-
-Say it out loud or write it down in one sentence.
 
 > **You're there when:** you have one sentence describing the real thing.
 
@@ -61,122 +65,139 @@ Say it out loud or write it down in one sentence.
 
 ## Set Claude up as a thought partner
 
-> **Hint:** _The setup prompt matters. If you skip it, Claude will default to giving advice, which is the opposite of what you want._
+> **Hint:** _The setup prompt matters. If you skip it, Claude defaults to giving advice._
 
-In your Claude Code window, paste this prompt:
+Paste this:
 
 ```
-I want you to be my thought partner for the next 15 minutes. Do not offer suggestions, opinions, recommendations, or ideas of your own. Your only job is to ask probing questions that help me think more clearly.
+I want you to be my thought partner for the next 20 minutes. Do not offer suggestions, opinions, recommendations, or ideas of your own. Your only job is to ask probing questions that help me think more clearly.
 
 Specifically:
-1. Reflect back what you hear me saying, in my own words, so I can check it
+1. Reflect back what you hear me saying, in my own words
 2. Probe my assumptions
-3. Ask me what I would say if someone disagreed
-4. Ask me what the version of this that fails looks like
+3. Ask what I would say if someone disagreed
+4. Ask what the version of this that fails looks like
 
-One question at a time. Wait for my answer before asking the next one. If I start pulling for advice, redirect me back to my own thinking.
+One question at a time. Wait for my answer before the next. If I pull for advice, redirect me back to my own thinking.
+
+After each of my answers, also tag it with one of: [assumption], [counter-case], [failure-mode], [core-belief], [open-question]. These tags will build a thought map at the end.
 
 Ready?
 ```
 
-Send it. Claude will confirm the mode. Now you are set up.
-
-> **You're there when:** Claude has confirmed it will only ask questions, not give answers.
+> **You're there when:** Claude has confirmed the mode.
 
 ---
 
 ## Say the thing out loud
 
-> **Hint:** _Do not try to be articulate. The messier the better. Claude will clean it up by asking you to clarify._
+> **Hint:** _Do not try to be articulate. Messier is better. Claude will clean it up by asking you to clarify._
 
-Type out what you are wrestling with. Do not polish it. Imagine you are venting to a friend who you trust to just listen.
+Type what you are wrestling with. Do not polish. Imagine venting to a friend you trust to just listen.
 
-Example of what this could look like:
+Claude will reflect back and ask a probing question. Answer honestly. Claude asks another. You are in the loop.
 
-```
-I am trying to decide whether to reorganize my team next quarter. I think it would be good for the work but I am worried about the morale hit and I am not sure if I have enough political capital to pull it off. Also I keep telling myself I am doing it for the work but I am worried I am actually doing it because I am frustrated with one person.
-```
-
-Claude will reflect back what it heard and ask you a probing question. Answer it honestly. Claude will ask another. You are in the loop now.
-
-> **You're there when:** Claude has asked you at least two questions and you have answered them.
+> **You're there when:** Claude has asked at least two questions and you have answered.
 
 ---
 
 ## Find the edges
 
-> **Hint:** _The best questions from Claude feel slightly uncomfortable. That is the signal you are getting somewhere._
+> **Hint:** _The best questions feel slightly uncomfortable. That is the signal you are getting somewhere._
 
-If Claude is staying too surface-level, ask for harder questions. Try:
+If Claude stays too surface-level, ask for harder questions:
 
 ```
-Ask me the question that someone who disagrees with me would ask.
+Ask me the question someone who disagrees would ask.
 ```
-
-or
 
 ```
 What am I assuming that I have not examined?
 ```
 
-or
-
 ```
-Walk me through the version of this where it fails. What was the first thing that went wrong?
+Walk me through the version where this fails. What went wrong first?
 ```
 
-These three prompts do the real work. They find the blind spot, the hidden assumption, and the failure mode. You will probably notice at least one of those in the next few minutes. That noticing is the whole point of the session.
+You will probably notice an assumption, a counter-case, or a failure mode you were avoiding. That noticing is the whole point.
 
-> **You're there when:** you have caught yourself saying "oh" or "actually" or "I had not thought about that" at least once.
+> **You're there when:** you have caught yourself saying "oh" or "actually" at least once.
 
 ---
 
 ## Close the loop
 
-> **Hint:** _The session is done when Claude can hand back your thinking, clearer than you gave it, without adding anything._
-
-When you feel you have the clarity you wanted, ask Claude:
+Paste:
 
 ```
-Summarize what I just worked through, in my own words, so I have a clean record.
+Summarize what I worked through, in my own words, so I have a clean record. Do not add anything. Keep all your tags on my statements so I can build a map.
 ```
 
-Claude will give you back your own thinking, tightened up. Notice that nothing in that summary is Claude's idea. Every piece is yours. That is the whole trick. You used Claude to think, and you walked away with better thinking, not a document someone else made.
+Claude hands back your own thinking, tightened up. Nothing is Claude's idea.
 
-If you want to keep the record, save the summary somewhere you can revisit it. Decisions you document are easier to defend later.
+> **You're there when:** you have a clean summary of your own reasoning.
 
-> **You're done when:** you can articulate the decision, assumption, or insight more clearly than you could at the start.
+---
+
+## Generate the interactive HTML thought map
+
+Paste this:
+
+```
+Now build me a single self-contained HTML file called thought-map.html that visualizes the reasoning tree of our conversation. Requirements:
+
+- Header: the question or decision I was wrestling with
+- A radial or tree layout where the central node is the core question
+- Each of my tagged statements becomes a node on the map. Color-coded by tag:
+  - [core-belief] green
+  - [assumption] yellow
+  - [counter-case] orange
+  - [failure-mode] red
+  - [open-question] blue
+- Lines connect related nodes (the connection reasoning comes from our conversation flow)
+- Clicking a node shows the full statement and any reflective question Claude asked about it
+- Below the map: a timeline of the conversation showing how my thinking evolved
+- Footer: a "What I believe now" box I can fill in, and a "Revisit" date picker
+- Clean modern styling, soft palette
+
+Use D3.js or Chart.js via CDN for layout. Otherwise inline CSS and vanilla JS.
+```
+
+Open `thought-map.html` in your browser. You should see your reasoning tree. Click nodes. See the whole shape.
+
+> **You're done when:** the map renders and you can trace your own reasoning visually.
 
 ---
 
 ## What You Just Did
 
-You just flipped the relationship. Claude was not your assistant in this session. It was your mirror. You did four things:
+You flipped the relationship. Claude was not your assistant. It was your mirror.
 
 1. **Set a boundary.** No suggestions, only questions.
-2. **Spoke messily.** Let the real thought come out before trying to clean it up.
-3. **Found the edges.** Used Claude to surface the assumption, the counter-case, and the failure mode you were avoiding.
-4. **Closed the loop.** Got your own thinking back, clearer than when you started.
+2. **Spoke messily.** Let real thought emerge.
+3. **Found the edges.** Surfaced assumptions, counter-cases, failure modes.
+4. **Closed the loop.** Got your thinking back clearer.
+5. **Visualized the reasoning** as a shareable tree.
 
-This is agent management at its purest. You are managing the agent by telling it what NOT to do, which is harder and more useful than telling it what to do.
+This is agent management at its purest. You managed Claude by telling it what NOT to do.
 
 ## What Not to Do
 
-1. **Do not skip the setup prompt.** Without it, Claude will slip into advice-giving mode. The boundary only holds if you set it.
-2. **Do not pull for answers.** If you catch yourself asking "so what should I do?", that is the signal that you are not in mirror mode anymore. Redirect.
-3. **Do not rush to polish.** The messy version of the thing contains the real answer. Give yourself permission to be imprecise at the start.
-4. **Do not use this mode for everything.** When you need a draft, Claude doing the drafting is faster. Thought partner mode is for decisions, not deliverables.
-5. **Do not hide from uncomfortable questions.** If a Claude question lands uncomfortably, stay with it. That is the one that matters.
+1. **Do not skip the setup prompt.** Without it Claude slips into advice.
+2. **Do not pull for answers.** If you catch yourself asking "what should I do," redirect.
+3. **Do not rush to polish.** The messy version contains the real answer.
+4. **Do not use this mode for everything.** When you need a draft, let Claude draft.
+5. **Do not hide from uncomfortable questions.**
 
 ## Next Steps
 
-When you are fluent with thought partner mode, try:
+When you are fluent with thought partner mode:
 
-- **Use Plan Mode** (easy) — The planning counterpart. Claude thinks through a task before doing it.
-- **Planning with Claude** (easy) — Take the thinking you did here and turn it into a plan you can execute.
-- **Build Your First Skill** (easy) — Turn your best thought partner prompt into a reusable skill you can invoke any time.
+- **Use Plan Mode** (easy) — The planning counterpart.
+- **Planning with Claude** (easy) — Turn thinking into a plan.
+- **Build Your First Skill** (easy) — Turn your best thought-partner prompt into a reusable skill.
 
 ## Reference
 
-- [Interactive mode (official Claude Code docs)](https://docs.anthropic.com/en/docs/claude-code/interactive-mode)
-- [Build Your First Skill](/labs/build-your-first-skill) — turn this pattern into a reusable skill
+- [Interactive mode (official docs)](https://docs.anthropic.com/en/docs/claude-code/interactive-mode)
+- [Build Your First Skill](/labs/build-your-first-skill)
