@@ -36,7 +36,7 @@ I'm a design engineer focused on [AREA, e.g. design systems, product UI, compone
 - [DESIGN SYSTEM]: [e.g. shadcn/ui, Radix, custom]
 - [DOCUMENTATION]: [e.g. Storybook, Chromatic]
 
-## Standards
+## Rules
 
 - Use design tokens (CSS variables) for colors, spacing, and typography — no magic numbers.
 - Animations should respect `prefers-reduced-motion`.

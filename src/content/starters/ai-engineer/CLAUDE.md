@@ -36,7 +36,7 @@ I'm an AI engineer building [WHAT, e.g. LLM-powered features, AI agents, RAG pip
 - [VECTOR DB]: [e.g. Pinecone, Weaviate, pgvector]
 - [EVALUATION]: [e.g. custom evals, Braintrust, LangSmith]
 
-## Standards
+## Rules
 
 - Never hardcode API keys. Use environment variables or secret managers.
 - Structured output uses schema validation (Zod) — don't trust raw model output.

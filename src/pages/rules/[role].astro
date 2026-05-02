@@ -25,7 +25,7 @@ try {
 
 <Base title={roleName}>
   <div style="padding: 2rem 0;">
-    <a href="/standards" style="font-size: 0.9rem; color: var(--text-muted);">&larr; All Standards</a>
+    <a href="/rules" style="font-size: 0.9rem; color: var(--text-muted);">&larr; All Rules</a>
     <div class="standard-header">
       <h1>{roleName}</h1>
       <p class="desc">{starter.data.description}</p>
@@ -60,7 +60,7 @@ try {
   .standard-header h1 {
     font-size: 2rem;
     font-weight: 700;
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-family: var(--font-display);
   }
   .desc { color: var(--text-muted); margin-top: 0.25rem; }
 
@@ -91,7 +91,7 @@ try {
     border-bottom: 1px solid var(--border);
   }
   .preview-filename {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.85rem;
     color: var(--accent);
   }

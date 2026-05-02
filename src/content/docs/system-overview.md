@@ -11,7 +11,7 @@ How all the pieces fit together. Four layers, all markdown, all editable.
 
 **Skills** are knowledge packets that activate based on context. Edit a `.prisma` file and database patterns load. Ask about testing and testing conventions appear. [Browse skills](/skills)
 
-**Standards** are role-based CLAUDE.md files. Working preferences, guardrails, and conventions. Pick a role, copy the file, customize. Active every session. [Browse standards](/standards)
+**Rules** are role-based CLAUDE.md files. Working preferences, guardrails, and conventions. Pick a role, copy the file, customize. Active every session. [Browse rules](/rules)
 
 **Settings and Hooks** control permissions and automation. Deny rules that can't be talked around, pre-approved commands, and hooks that fire on events like file saves and commits. [Read more](/docs/settings-json-tips)
 
@@ -46,14 +46,14 @@ Each agent is one markdown file. [Browse the full catalog](/agents).
 
 Skills are invoked as slash commands and walk you through interactive workflows. [Browse all skills](/skills).
 
-## Standards
+## Rules
 
 12 role-based CLAUDE.md files.
 
 **Technical:** Developer, QA Engineer, Data Engineer, Tech Lead, DevOps Engineer, Design Engineer, AI Engineer.
 **Non-Technical:** Product Owner, Manager, Educator, Consultant, Analyst.
 
-Each one is a real CLAUDE.md you can copy and customize. [Browse standards](/standards).
+Each one is a real CLAUDE.md you can copy and customize. [Browse rules](/rules).
 
 ## Settings and Hooks
 

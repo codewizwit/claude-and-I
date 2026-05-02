@@ -15,22 +15,46 @@ const { title, description = "Ready-to-use agents, skills, and configs for Claud
     <meta name="description" content={description} />
     <title>{title} — claude &amp; i</title>
     <style is:global>
-      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
       :root {
-        --bg: #ffffff;
-        --bg-card: #ffffff;
-        --bg-subtle: #f8fafc;
-        --bg-hover: #f1f5f9;
-        --border: #e5e7eb;
-        --border-strong: #cbd5e1;
-        --text: #0f172a;
-        --text-muted: #475569;
-        --text-subtle: #6b7280;
-        --accent: #5b21b6;
-        --accent-dim: #7c3aed;
-        --accent-soft: #faf5ff;
-        --accent-border: #e9d5ff;
+        /* Wizwit brand baseline — fixed across the codewizwit suite */
+        --color-cream: #f5f3ee;
+        --color-ink: #1a1a1a;
+        --color-ink-soft: #4a4a4a;
+        --color-gray: #6b6b6b;
+        --color-gray-light: #a3a3a3;
+        --color-gray-border: #d4d2cd;
+        --color-white: #ffffff;
+
+        --font-display: "Fraunces", ui-serif, serif;
+        --font-body: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+        --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+        --ease-morph: cubic-bezier(0.65, 0, 0.35, 1);
+
+        --beat-pad-y: clamp(3rem, 10vh, 8rem);
+        --measure: 34rem;
+
+        /* Per-piece accent for claude & i — neon teal */
+        --accent: #00d4b4;
+        --accent-dim: #00bfa5;
+        --accent-dark: #00897b;
+        --accent-soft: #e6faf5;
+        --accent-border: #9eebd9;
+
+        /* Legacy aliases — keep page-level styles working */
+        --bg: var(--color-cream);
+        --bg-card: var(--color-white);
+        --bg-subtle: #efece4;
+        --bg-hover: #e8e4da;
+        --border: var(--color-gray-border);
+        --border-strong: var(--color-gray-light);
+        --text: var(--color-ink);
+        --text-muted: var(--color-ink-soft);
+        --text-subtle: var(--color-gray);
+
         --green: #047857;
         --green-bg: #ecfdf5;
         --yellow: #b45309;
@@ -46,19 +70,29 @@ const { title, description = "Ready-to-use agents, skills, and configs for Claud
       html, body { background: var(--bg); }
 
       body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        font-family: var(--font-body);
         color: var(--text);
         line-height: 1.65;
         min-height: 100vh;
         -webkit-font-smoothing: antialiased;
       }
 
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
       code, pre {
-        font-family: 'JetBrains Mono', monospace;
+        font-family: var(--font-mono);
+      }
+
+      a:hover {
+        color: var(--accent-dark);
       }
 
       a {
-        color: var(--accent);
+        color: var(--accent-dark);
         text-decoration: none;
       }
       a:hover { text-decoration: underline; }
@@ -82,26 +116,90 @@ const { title, description = "Ready-to-use agents, skills, and configs for Claud
     </style>
   </head>
   <body>
-    <nav style="border-bottom: 1px solid var(--border); padding: 1rem 0; background: var(--bg);">
-      <div class="container" style="display: flex; align-items: center; gap: 2rem;">
-        <a href="/" style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--text); letter-spacing: -0.01em;">claude & i</a>
-        <div style="display: flex; gap: 1.75rem; font-size: 0.92rem; font-weight: 500;">
-          <a href="/agents" style="color: var(--text);">Agents</a>
-          <a href="/skills" style="color: var(--text);">Skills</a>
-          <a href="/labs" style="color: var(--text);">Labs</a>
-          <a href="/standards" style="color: var(--text);">Standards</a>
-          <a href="/docs" style="color: var(--text);">Docs</a>
-          <a href="https://github.com" id="gh-link" style="color: var(--text-subtle);">GitHub</a>
+    <nav class="site-nav">
+      <div class="container site-nav__inner">
+        <a href="/" class="site-nav__brand">CLAUDE &amp; I</a>
+        <div class="site-nav__links">
+          <a href="/agents">AGENTS</a>
+          <a href="/skills">SKILLS</a>
+          <a href="/labs">LABS</a>
+          <a href="/rules">RULES</a>
+          <a href="/docs">DOCS</a>
+          <a href="https://github.com" id="gh-link" class="site-nav__github">GITHUB</a>
         </div>
       </div>
     </nav>
     <main class="container" style="padding: 2rem 2.5rem 4rem;">
       <slot />
     </main>
-    <footer style="border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; color: var(--text-subtle); font-size: 0.85rem; background: var(--bg);">
-      <div class="container">
-        No Human Left Behind. Built by <a href="https://codewizwit.com">codewizwit</a>
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <span>NO HUMAN LEFT BEHIND</span>
+        <span>BUILT BY <a href="https://codewizwit.com">CODE<span class="brand-pop">WIZWIT</span></a></span>
       </div>
     </footer>
+    <style is:global>
+      .site-nav {
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 0;
+        background: var(--bg);
+      }
+      .site-nav__inner {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+      .site-nav__brand {
+        font-family: var(--font-mono);
+        font-weight: 600;
+        font-size: 0.8125rem;
+        letter-spacing: 0.18em;
+        color: var(--text);
+        text-transform: uppercase;
+      }
+      .site-nav__brand:hover { text-decoration: none; color: var(--accent-dark); }
+      .site-nav__links {
+        display: flex;
+        gap: 1.75rem;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      .site-nav__links a {
+        color: var(--text);
+        text-decoration: none;
+      }
+      .site-nav__links a:hover { color: var(--accent-dark); text-decoration: none; }
+      .site-nav__github { color: var(--text-subtle) !important; }
+      .site-footer {
+        border-top: 1px solid var(--border);
+        padding: 2rem 0;
+        background: var(--bg);
+      }
+      .site-footer__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .site-footer__inner a { color: var(--text); text-decoration: none; }
+      .site-footer__inner .brand-pop {
+        color: var(--accent-dark);
+        font-weight: 700;
+      }
+      @media (max-width: 768px) {
+        .site-nav__links { gap: 1rem; }
+        .site-footer__inner { justify-content: center; text-align: center; }
+      }
+    </style>
   </body>
 </html>

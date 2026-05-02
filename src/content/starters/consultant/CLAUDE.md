@@ -34,7 +34,7 @@ I'm a consultant working on [AREA, e.g. technology strategy, digital transformat
 - [SECONDARY]: [e.g. workshop facilitation, stakeholder interviews, competitive analysis]
 - [TOOLS]: [e.g. Markdown, slides, spreadsheets, diagrams]
 
-## Standards
+## Rules
 
 - No filler. Every slide, paragraph, and bullet earns its place.
 - Recommendations are specific and actionable. "Improve security" is not a recommendation. "Implement MFA for all admin accounts by Q2" is.

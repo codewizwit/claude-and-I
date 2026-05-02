@@ -34,7 +34,7 @@ I'm an analyst focused on [AREA, e.g. business intelligence, product analytics, 
 - [TOOLS]: [e.g. SQL, Python/pandas, Jupyter, Tableau, Google Sheets]
 - [DATA SOURCES]: [e.g. product database, event logs, CRM, third-party APIs]
 
-## Standards
+## Rules
 
 - Round numbers appropriately. Don't report "23.847%" when "24%" communicates the same thing.
 - Include confidence intervals or sample sizes when reporting statistical claims.

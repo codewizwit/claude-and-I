@@ -10,12 +10,23 @@ const funAgents = agents.filter((a) => a.data.type === "fun").slice(0, 3);
 ---
 
 <Base title="Home">
+  <div class="topbar">
+    <span class="mark">CODE<span class="brand-pop">WIZWIT</span> CLAUDE CODE ENVIRONMENT</span>
+  </div>
+
   <div class="hero">
-    <p class="eyebrow">CLAUDE & I</p>
-    <h1>codewizwit Claude Code env</h1>
-    <p class="subtitle">
-      33 agents. 4 skills. 12 standards. Generic tools serve everyone the same way, which means they serve no one particularly well. This is a Claude Code environment built to be personalized. Fork it, shape it around how you actually work, and build something that serves you specifically. Open source. No Human Left Behind.
+    <h1>claude <span class="accent">&</span> i<span class="period">.</span></h1>
+    <p class="lede">
+      A Claude Code environment built to be personalized. Fork it, shape it around how you actually work.
     </p>
+    <p class="subtitle">
+      Generic tools serve everyone the same way, which means they serve no one particularly well. Build something that serves you specifically. Open source. No Human Left Behind.
+    </p>
+    <div class="hero-meta">
+      <span>{agents.length} Agents</span>
+      <span>31 Skills</span>
+      <span>{starters.length} Rules</span>
+    </div>
     <div class="hero-actions">
       <a href="/agents" class="btn btn-primary">Browse the system</a>
       <a href="/docs/getting-started" class="btn btn-secondary">Fork and customize</a>
@@ -23,25 +34,32 @@ const funAgents = agents.filter((a) => a.data.type === "fun").slice(0, 3);
   </div>
 
   <section class="section">
-    <p class="eyebrow">THE SYSTEM</p>
+    <div class="section-divider">
+      <span>THE SYSTEM</span>
+      <span>4 / LAYERS</span>
+    </div>
     <h2>Four layers that work together</h2>
     <div class="layers-grid">
       <a href="/agents" class="layer-card">
-        <span class="layer-num">33</span>
+        <span class="card-label">№ 01 / AGENTS</span>
+        <span class="layer-num">{agents.length}</span>
         <h3>Agents</h3>
         <p>Specialized assistants for thinking, building, reviewing, and debugging. Each has its own model, tools, and expertise.</p>
       </a>
       <a href="/skills" class="layer-card">
-        <span class="layer-num">4</span>
+        <span class="card-label">№ 02 / SKILLS</span>
+        <span class="layer-num">31</span>
         <h3>Skills</h3>
-        <p>Interactive skills that run inside Claude Code. Setup wizard, CLAUDE.md generator, skill discovery, and more.</p>
+        <p>Auto-injected knowledge packets that activate based on what you're working on. Setup wizard, CLAUDE.md generator, skill discovery.</p>
       </a>
-      <a href="/standards" class="layer-card">
-        <span class="layer-num">12</span>
-        <h3>Standards</h3>
+      <a href="/rules" class="layer-card">
+        <span class="card-label">№ 03 / RULES</span>
+        <span class="layer-num">{starters.length}</span>
+        <h3>Rules</h3>
         <p>Role-based CLAUDE.md files. Pick your role, copy the file, fill in the placeholders. Active every session.</p>
       </a>
       <a href="/docs/settings-json-tips" class="layer-card">
+        <span class="card-label">№ 04 / HOOKS</span>
         <span class="layer-num">2</span>
         <h3>Settings / Hooks</h3>
         <p>Permissions, deny rules, automated hooks, and agent teams. Auto-format on save, block push to main, coordinate parallel agents.</p>
@@ -50,11 +68,12 @@ const funAgents = agents.filter((a) => a.data.type === "fun").slice(0, 3);
   </section>
 
   <section class="section">
+    <div class="section-divider">
+      <span>WORK AGENTS</span>
+      <span>{workAgents.length} / SPECIALISTS</span>
+    </div>
     <div class="section-header">
-      <div>
-        <p class="eyebrow">WORK AGENTS</p>
-        <h2>Different modes of working</h2>
-      </div>
+      <h2>Different modes of working</h2>
       <a href="/agents" class="see-all">All {agents.length} agents</a>
     </div>
     <div class="agent-grid">
@@ -72,7 +91,10 @@ const funAgents = agents.filter((a) => a.data.type === "fun").slice(0, 3);
   </section>
 
   <section class="section">
-    <p class="eyebrow">NOT JUST WORK</p>
+    <div class="section-divider">
+      <span>NOT JUST WORK</span>
+      <span>{funAgents.length} / FUN</span>
+    </div>
     <h2>Fun agents</h2>
     <p class="section-desc">Philosophy, sci-fi, anime, music. Not everything has to be productive.</p>
     <div class="agent-grid">
@@ -90,21 +112,27 @@ const funAgents = agents.filter((a) => a.data.type === "fun").slice(0, 3);
   </section>
 
   <section class="section">
-    <p class="eyebrow">STANDARDS</p>
+    <div class="section-divider">
+      <span>RULES</span>
+      <span>{starters.length} / ROLES</span>
+    </div>
     <h2>Pick your role</h2>
     <div class="starter-grid">
       {starters.slice(0, 6).map((s) => (
-        <a href={`/standards/${s.data.role}`} class="starter-card">
+        <a href={`/rules/${s.data.role}`} class="starter-card">
           <h3>{s.data.role.replace(/-/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase())}</h3>
           <p>{s.data.description}</p>
         </a>
       ))}
     </div>
-    <a href="/standards" class="see-all" style="display: inline-block; margin-top: 1rem;">All {starters.length} roles</a>
+    <a href="/rules" class="see-all" style="display: inline-block; margin-top: 1rem;">All {starters.length} roles</a>
   </section>
 
   <section class="section philosophy">
-    <p class="eyebrow">WHY PERSONALIZE</p>
+    <div class="section-divider">
+      <span>WHY PERSONALIZE</span>
+      <span>NO HUMAN LEFT BEHIND</span>
+    </div>
     <h2>Your environment should work like you do</h2>
     <div class="philosophy-content">
       <p>Most AI setups are one-size-fits-all. Same defaults, same behavior, same blind spots for everyone. That's convenient to ship, but it means the tool never really learns how you think, what you care about, or what you'd never want it to do.</p>
@@ -115,7 +143,10 @@ const funAgents = agents.filter((a) => a.data.type === "fun").slice(0, 3);
   </section>
 
   <section class="section cta">
-    <p class="eyebrow">MAKE IT YOURS</p>
+    <div class="section-divider">
+      <span>MAKE IT YOURS</span>
+      <span>3 COMMANDS</span>
+    </div>
     <h2>Fork it, run the wizard</h2>
     <p class="section-desc">Fork the repo to own your version, then the setup wizard walks you through picking agents, skills, and a standard.</p>
 
@@ -165,32 +196,100 @@ const funAgents = agents.filter((a) => a.data.type === "fun").slice(0, 3);
 </Base>
 
 <style>
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    padding: 0.5rem 0 clamp(2rem, 6vh, 4rem);
+  }
+  .topbar .mark { color: var(--text); font-weight: 600; }
+  .topbar .brand-pop {
+    color: var(--accent-dark);
+    font-weight: 700;
+  }
+
+  .section-divider {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+  }
+  .section-divider span:first-child { color: var(--text); font-weight: 600; }
+
   .eyebrow {
-    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
-    color: var(--accent);
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
     margin-bottom: 0.4rem;
   }
 
   .hero {
-    padding: 4rem 0 2.5rem;
-    max-width: 620px;
+    padding: 0 0 clamp(2rem, 6vh, 4rem);
+    max-width: 100%;
   }
   .hero h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(3.5rem, 12vw, 9rem);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    margin: 0;
+    color: var(--text);
+    text-wrap: balance;
+  }
+  .hero h1 .accent {
+    font-family: var(--font-body);
+    color: var(--accent-dark);
+    font-style: italic;
+    font-weight: 500;
+    font-variation-settings: normal;
+    padding: 0 0.05em;
+  }
+  .hero h1 .period { color: var(--text); }
+  .lede {
+    margin-top: clamp(1.5rem, 3vh, 2rem);
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: clamp(1.125rem, 1.6vw, 1.4rem);
+    line-height: 1.45;
+    color: var(--text-muted);
+    max-width: 38rem;
   }
   .subtitle {
     color: var(--text-muted);
-    font-size: 1.05rem;
-    margin-top: 0.75rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    margin-top: 1.25rem;
+    line-height: 1.65;
+    max-width: 42rem;
   }
+  .hero-meta {
+    margin-top: 2rem;
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+  }
+  .hero-meta span { color: var(--text); }
   .hero-actions {
     margin-top: 1.5rem;
     display: flex;
@@ -211,7 +310,7 @@ const funAgents = agents.filter((a) => a.data.type === "fun").slice(0, 3);
   .section h2 {
     font-size: 1.5rem;
     font-weight: 600;
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-family: var(--font-display);
   }
   .section-header {
     display: flex;
@@ -235,29 +334,52 @@ const funAgents = agents.filter((a) => a.data.type === "fun").slice(0, 3);
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 0.75rem;
-    padding: 1.5rem;
+    padding: 1.75rem 1.5rem 1.5rem;
     color: var(--text);
-    transition: border-color 0.15s;
+    transition: border-color 0.2s var(--ease-out), transform 0.2s var(--ease-out);
     display: block;
+    position: relative;
+    overflow: hidden;
   }
-  .layer-card:hover { border-color: var(--accent-dim); text-decoration: none; }
+  .layer-card:hover {
+    border-color: var(--accent);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+  .card-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
   .layer-num {
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--accent);
-    line-height: 1;
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(3.5rem, 5vw, 4.5rem);
+    line-height: 0.9;
+    color: var(--accent-dark);
+    font-variation-settings: "opsz" 144, "SOFT" 100;
+    display: block;
+    margin-bottom: 0.75rem;
   }
   .layer-card h3 {
-    font-size: 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
     font-weight: 600;
-    margin: 0.4rem 0;
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+    color: var(--text);
   }
   .layer-card p {
     font-size: 0.9rem;
     color: var(--text-muted);
-    line-height: 1.5;
+    line-height: 1.55;
   }
 
   .agent-grid {

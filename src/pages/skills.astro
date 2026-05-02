@@ -27,10 +27,10 @@ const skills = [
   { name: "Responsible AI Governance", category: "AI", triggers: "prompt keywords", description: "Human-in-the-loop, accountability, developer-first AI" },
   { name: "Testing Automation", category: "Testing", triggers: "**/*.test.ts, **/*.spec.ts", description: "Jest, Vitest, Playwright, Cypress, mutation testing" },
   { name: "Given-When-Then", category: "Testing", triggers: "prompt keywords", description: "Acceptance criteria, BDD scenarios, user story breakdowns" },
-  { name: "Engineering Practices", category: "Standards", triggers: "prompt keywords", description: "SOLID principles, clean code, testing strategies" },
-  { name: "Accessibility First", category: "Standards", triggers: "prompt keywords", description: "WCAG standards, semantic HTML, ARIA, keyboard navigation" },
-  { name: "Documentation Standards", category: "Standards", triggers: "**/*.md, docs/**", description: "Concise, clean, no repetition, no filler, no emojis" },
-  { name: "Code Documentation", category: "Standards", triggers: "**/*.ts, **/*.tsx", description: "TSDoc with params, returns, throws. No inline comments." },
+  { name: "Engineering Practices", category: "Rules", triggers: "prompt keywords", description: "SOLID principles, clean code, testing strategies" },
+  { name: "Accessibility First", category: "Rules", triggers: "prompt keywords", description: "WCAG standards, semantic HTML, ARIA, keyboard navigation" },
+  { name: "Documentation Standards", category: "Rules", triggers: "**/*.md, docs/**", description: "Concise, clean, no repetition, no filler, no emojis" },
+  { name: "Code Documentation", category: "Rules", triggers: "**/*.ts, **/*.tsx", description: "TSDoc with params, returns, throws. No inline comments." },
   { name: "Git Workflow", category: "Workflow", triggers: "bash: git, gh", description: "Commit conventions, branching, PR best practices" },
   { name: "CI/CD Pipelines", category: "Workflow", triggers: ".github/workflows/**", description: "GitHub Actions, secrets management, deployment strategies" },
   { name: "Epic Breakdown", category: "Workflow", triggers: "prompt keywords", description: "Break epics into prioritized, estimated user stories" },
@@ -125,10 +125,11 @@ const categories = [...new Set(skills.map(s => s.category))];
     padding: 0.75rem;
     border-bottom: 1px solid var(--border);
     color: var(--text-muted);
-    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 500;
+    letter-spacing: 0.16em;
+    font-weight: 600;
   }
   .skill-table td {
     padding: 0.75rem;
@@ -152,7 +153,7 @@ const categories = [...new Set(skills.map(s => s.category))];
     white-space: nowrap;
   }
   .triggers {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.8rem;
     color: var(--accent);
   }
@@ -168,7 +169,7 @@ const categories = [...new Set(skills.map(s => s.category))];
   .how-skills-work h2 {
     font-size: 1.35rem;
     margin-bottom: 0.5rem;
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-family: var(--font-display);
   }
   .how-intro {
     color: var(--text-muted);

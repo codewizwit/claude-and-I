@@ -5,9 +5,9 @@ import { getCollection } from "astro:content";
 const starters = (await getCollection("starters")).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Base title="Standards" description="Role-based CLAUDE.md standards — pick your role and start working.">
+<Base title="Rules" description="Role-based CLAUDE.md standards — pick your role and start working.">
   <div style="padding: 2rem 0 1rem;">
-    <h1>Standards</h1>
+    <h1>Rules</h1>
     <p style="color: var(--text-muted); margin-top: 0.5rem; max-width: 600px;">
       A CLAUDE.md is your working agreement with Claude Code — your standards, preferences, and guardrails.
       Pick the one closest to your role, copy it, and customize.
@@ -16,7 +16,7 @@ const starters = (await getCollection("starters")).sort((a, b) => a.data.order -
 
   <div class="starter-grid">
     {starters.map((starter) => (
-      <a href={`/standards/${starter.data.role}`} class="starter-card">
+      <a href={`/rules/${starter.data.role}`} class="starter-card">
         <h3>{starter.data.role.replace(/-/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase())}</h3>
         <p>{starter.data.description}</p>
         <span class="file-name">CLAUDE.md</span>
@@ -38,7 +38,7 @@ const starters = (await getCollection("starters")).sort((a, b) => a.data.order -
         <span class="step-num">2</span>
         <div>
           <strong>Copy the file</strong>
-          <code>cp src/content/standards/developer/CLAUDE.md ~/.claude/CLAUDE.md</code>
+          <code>cp src/content/rules/developer/CLAUDE.md ~/.claude/CLAUDE.md</code>
         </div>
       </div>
       <div class="step">
@@ -90,7 +90,7 @@ const starters = (await getCollection("starters")).sort((a, b) => a.data.order -
     margin-bottom: 0.75rem;
   }
   .file-name {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.8rem;
     color: var(--accent);
   }

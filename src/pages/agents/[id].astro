@@ -108,7 +108,7 @@ const modelColors: Record<string, string> = {
   .agent-header h1 {
     font-size: 2rem;
     font-weight: 700;
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-family: var(--font-display);
   }
   .tagline {
     color: var(--text-muted);
@@ -129,14 +129,16 @@ const modelColors: Record<string, string> = {
   }
   .meta-label {
     display: block;
+    font-family: var(--font-mono);
     font-size: 0.75rem;
+    font-weight: 600;
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.16em;
     margin-bottom: 0.2rem;
   }
   .meta-value {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.9rem;
   }
 
@@ -169,7 +171,7 @@ const modelColors: Record<string, string> = {
     border-bottom: 1px solid var(--border);
   }
   .preview-filename {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.85rem;
     color: var(--accent);
   }
@@ -187,7 +189,7 @@ const modelColors: Record<string, string> = {
   .copy-btn:hover { color: var(--text); border-color: var(--accent-dim); }
   .preview-content {
     padding: 1.5rem;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.8rem;
     line-height: 1.6;
     color: var(--text-muted);

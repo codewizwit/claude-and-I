@@ -36,7 +36,7 @@ I'm a DevOps engineer managing [INFRASTRUCTURE, e.g. AWS, GCP, Azure, Vercel] fo
 - [CONTAINERS]: [e.g. Docker, Kubernetes, ECS]
 - [MONITORING]: [e.g. Datadog, Grafana, CloudWatch, PagerDuty]
 
-## Standards
+## Rules
 
 - Container images must be minimal — use multi-stage builds, no dev dependencies.
 - Secrets come from [SECRET MANAGER, e.g. AWS Secrets Manager, Vault, env vars] — never hardcoded.

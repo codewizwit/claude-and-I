@@ -34,7 +34,7 @@ I'm an educator creating [CONTENT, e.g. curriculum, lesson plans, workshops, tra
 - [TOOLS]: [e.g. Markdown, slides, interactive notebooks, video scripts]
 - [AUDIENCE]: [e.g. beginners, intermediate practitioners, executives]
 
-## Standards
+## Rules
 
 - Learning objectives use measurable verbs (explain, implement, evaluate). Not "understand."
 - Every exercise has expected output so learners can self-check.

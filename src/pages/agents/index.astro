@@ -38,7 +38,7 @@ const typeDescs: Record<string, string> = {
     if (filtered.length === 0) return null;
     return (
       <section style="padding: 1.25rem 0;">
-        <h2 style="font-size: 1.25rem; font-weight: 600; font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;">{typeLabels[type]}</h2>
+        <h2 style="font-size: 1.25rem; font-weight: 600; font-family: var(--font-display);">{typeLabels[type]}</h2>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">{typeDescs[type]}</p>
         <div class="agent-grid">
           {filtered.map((agent) => (
